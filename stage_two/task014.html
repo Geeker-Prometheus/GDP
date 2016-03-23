@@ -32,27 +32,46 @@
     遍历读取aqiData中各个城市的数据
     将空气质量指数大于60的城市显示到aqi-list的列表中
     */
+
+    // 另一种思路是通过 innerHTML 代替 appendChild。
+    // 过滤和排序可以链式调用。
+
     var outputData = [];
     var count      = 0;
 
     var ul = document.querySelector('#aqi-list');
-
-    for (var i = 0; i < aqiData.length; i++) {
-      if (aqiData[i][1] > 60) {
-        outputData.push(aqiData[i]);
-      }
-    }
-
     var documentFragment = document.createElement('documentFragment');
+
+    // 过滤：选出空气质量指数大于60城市，可通过 filter 实现
+    outputData = aqiData.filter(function(item, index, array) {
+      return item[1] > 60;
+
+    })
+    // for (var i = 0; i < aqiData.length; i++) {
+    //   if (aqiData[i][1] > 60) {
+    //     outputData.push(aqiData[i]);
+    //   }
+    // }
+
+    // 排序
     outputData.sort(function(i, j) {
       return i[1] < j[1];
     })
+
+    // 生成 li, 可通过字符串拼接
+    var result = '';
     for (var i = 0; i < outputData.length; i++) {
-      var li = document.createElement('li');
-      li.innerText = '第' + (i+1) + '名: ' + outputData[i][0] + ', ' + outputData[i][1];
-      documentFragment.appendChild(li);
+      result += '<li>第' + (i + 1) + '名: ' + outputData[i][0] + ', ' + outputData[i][1];
     }
-    ul.appendChild(documentFragment);
+    ul.innerHTML = result;
+
+    // 通过 documentFragment
+    // for (var i = 0; i < outputData.length; i++) {
+    //   var li = document.createElement('li');
+    //   li.innerText = '第' + (i + 1) + '名: ' + outputData[i][0] + ', ' + outputData[i][1];
+    //   documentFragment.appendChild(li);
+    // }
+    // ul.appendChild(documentFragment);
   })();
 
   </script>

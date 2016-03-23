@@ -43,10 +43,17 @@
     console.log(lis.length);
     for (var i = 0; i < lis.length; i++) {
       var tmpArr = [];
-      var city = lis[i].innerHTML.slice(0, 2); // 处理城市不严谨
-      var score = lis[i].querySelector('b').innerText;
-      tmpArr.push(city);
-      tmpArr.push(score);
+
+      // 处理城市不严谨，以下改用正则
+      
+      // var city = lis[i].innerText.slice(0, 2); 
+      // var score = lis[i].querySelector('b').innerText;
+      // tmpArr.push(city);
+      // tmpArr.push(score);
+
+      var targetList = lis[i].innerText.split(/空气质量：/g);
+      tmpArr.push(targetList[0], targetList[1]);
+
       data.push(tmpArr);
     }
     /*

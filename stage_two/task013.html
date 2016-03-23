@@ -21,6 +21,9 @@
     获取aqi-input输入的值，并显示在aqi-display中
     */
     var btn = document.querySelector('#button');
+
+    // 采用 DOM 2级事件方法（参考 https://github.com/HeyJax/heyjax.github.io/blob/master/demo/stage_2/task13/index.html）
+    // 尚未对输入为空或者空格进行特殊处理，多空格输出仅有一个。
     btn.addEventListener('click', function() {
       document.querySelector('#aqi-display').innerText = document.querySelector('#aqi-input').value;
     }, false);
