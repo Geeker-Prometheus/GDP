@@ -1,0 +1,10 @@
+li {
+  list-style:       none;
+  display:          inline-block;
+  width:            32px;
+  padding:          3px;
+  margin:           3px;
+  text-align:       center;
+  background-color: red;
+  color:            #FFFFFF;
+}

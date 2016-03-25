@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task018</title>
+  <link rel="stylesheet" href="./stylesheet/task019.css">
+</head>
+<body>
+  <div class="container">
+    <div class="operation">
+      <input type="number" id="new-number" min="10" max="100">
+      <button id="left-in">左侧入</button>
+      <button id="right-in">右侧入</button>
+      <button id="left-out">左侧出</button>
+      <button id="right-out">右侧出</button>
+    </div>
+    <div class="queue-outer">
+      <ul id="queue"></ul>
+    </div>
+  </div>
+  <script>
+  var newNumber = document.querySelector('#new-number');
+  var leftIn    = document.querySelector('#left-in');
+  var rightIn   = document.querySelector('#right-in');
+  var leftOut   = document.querySelector('#left-out');
+  var rightOut  = document.querySelector('#right-out');
+  var queue     = document.querySelector('#queue');
+  var count     = 0;
+
+  var MAX_COUNT = 5;
+
+  leftIn.addEventListener('click', function() {
+    console.log('before current:' + queue.childNodes.length);
+    if (queue.childNodes.length >= MAX_COUNT) {
+      alert('达到上限');
+      return;
+    }
+    if (parseInt(newNumber.value, 10)) {
+      var li = document.createElement('li');
+      li.innerText = newNumber.value;
+      li.style.height = newNumber.value * 10 
+      queue.insertBefore(li, queue.firstChild);
+    } else {
+      alert('input is not valid');
+    }
+    console.log('after current:' + queue.childNodes.length);
+  })
+
+  rightIn.addEventListener('click', function() {
+    console.log('before current:' + queue.childNodes.length);
+    if (queue.childNodes.length >= MAX_COUNT) {
+      alert('达到上限');
+      return;
+    }
+    if (parseInt(newNumber.value, 10)) {
+      var li = document.createElement('li');
+      li.innerText = newNumber.value;
+      queue.appendChild(li);
+    } else {
+      alert('input is not valid');
+    }
+    console.log('after current:' + queue.childNodes.length);
+  })
+
+  leftOut.addEventListener('click', function() {
+    if(queue.childNodes.length >= 1) {
+      var li = queue.removeChild(queue.firstChild);
+      alert(li.innerText);
+    } else {
+      alert('queue is empty');
+    }
+  })
+
+  rightOut.addEventListener('click', function() {
+    if(queue.childNodes.length >= 1) {
+      var li = queue.removeChild(queue.lastChild);
+      alert(li.innerText);
+    } else {
+      alert('queue is empty');
+    }
+  })
+
+  queue.addEventListener('click', function(e) {
+    queue.removeChild(e.target);
+  })
+  </script>
+</body>
+</html>
